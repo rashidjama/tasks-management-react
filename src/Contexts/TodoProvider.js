@@ -1,6 +1,8 @@
-import React, { createContext, useState} from 'react'
+import React, { createContext, useReducer} from 'react';
+import TodoReducer from '../Reducers/TodoReducer';
 
 export const TodoContext = createContext();
+export const DispatchContext = createContext();
 
 export default function TodoProvider(props) {
   const initialData = [
@@ -9,10 +11,12 @@ export default function TodoProvider(props) {
     {task: 'funny is react', id:3, completed: false}
   ];
 
-  const [tasks, setTask] = useState(initialData)
+  const [tasks, dispatch] = useReducer(TodoReducer, initialData)
   return (
     <TodoContext.Provider value={tasks}>
-      {props.children}
+      <DispatchContext.Provider value={dispatch}>
+        {props.children}
+      </DispatchContext.Provider>
     </TodoContext.Provider>
   )
 }
