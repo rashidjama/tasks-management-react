@@ -1,17 +1,15 @@
-import React, { createContext, useReducer} from 'react';
+import React, { createContext, useEffect, useReducer} from 'react';
 import TodoReducer from '../Reducers/TodoReducer';
 
 export const TodoContext = createContext();
 export const DispatchContext = createContext();
 
 export default function TodoProvider(props) {
-  const initialData = [
-    {task: 'keep working hard', id:1, completed: false},
-    {task: 'I hate deployment', id:2, completed: true},
-    {task: 'funny is react', id:3, completed: false}
-  ];
-
+  const initialData = JSON.parse(window.localStorage.getItem('tasks') || '[]');
   const [tasks, dispatch] = useReducer(TodoReducer, initialData)
+  useEffect(_=> {
+    window.localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
   return (
     <TodoContext.Provider value={tasks}>
       <DispatchContext.Provider value={dispatch}>

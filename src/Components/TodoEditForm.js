@@ -23,6 +23,7 @@ export default function TodoEditForm({id, task, toggle}) {
         fullWidth
         onChange={handleChange}
         value={value}
+        autoFocus
       />
     </form>
   )
