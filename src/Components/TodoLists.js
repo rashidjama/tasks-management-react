@@ -2,10 +2,12 @@ import React, { useContext } from 'react';
 import {TodoContext} from '../Contexts/TodoProvider';
 import { List, Divider, Paper } from '@material-ui/core'
 import Todo from './Todo';
+import { ThemeContext } from '../Contexts/ThemeProvider'
 
 export default function TodoLists() {
 
   const tasks = useContext(TodoContext);
+  const darkMode = useContext(ThemeContext);
 
   const clearAllTasks = _ => {
     window.localStorage.removeItem('tasks');
@@ -46,8 +48,8 @@ export default function TodoLists() {
         )}
         </Paper>
           { tasks.length > 1 ? <span className='d-flex justify-content-between align-items-center'>
-            <a href='mailto:rashidjama5@gmail.com' target='blank' className='btn btn-outline-primary btn-sm'>FEEDBACK</a>
-            <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-outline-danger btn-sm'>Delete All Tasks!</button></span> : <a href='mailto:rashidjama5@gmail.com' target='blank' className='btn btn-outline-primary btn-sm'>FEEDBACK</a>}
+            <a href='mailto:rashidjama5@gmail.com' target='blank' className={darkMode ? 'btn btn-outline-light btn-sm' : 'btn btn-outline-dark btn-sm'}>Feedback</a>
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal" className='btn btn-danger btn-sm'>Delete All Tasks!</button></span> : <a href='mailto:rashidjama5@gmail.com' target='blank' className={darkMode ? 'btn btn-outline-light btn-sm' : 'btn btn-outline-dark btn-sm'}>Feedback</a>}
       </div>
     )
   }

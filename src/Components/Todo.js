@@ -29,7 +29,7 @@ export default function Todo({ id, task, completed}) {
         <IconButton color='primary' size="small" onClick={toggle}>
         <span>&#9997;</span>
         </IconButton>
-        <IconButton className='ml-2 pr-0' size='small' color='secondary' onClick={handleShow}>
+        <IconButton className='ml-3 pr-0' size='small' color='secondary' onClick={handleShow}>
         <span>&#10005;</span>
         </IconButton>
       </ListItemSecondaryAction>

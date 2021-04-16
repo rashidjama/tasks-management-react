@@ -1,18 +1,14 @@
 import React, { useContext, useState } from 'react';
-import TextField from '@material-ui/core/TextField';
 import {DispatchContext} from '../Contexts/TodoProvider';
 import { ThemeContext } from '../Contexts/ThemeProvider';
-import { makeStyles } from '@material-ui/core';
+import { Snackbar} from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    border: '2px sold red'
-  }
-}))
+
 function TodoForm() {
-  const classes = useStyles();
   
   const [value, setValue] = useState('');
+  const [open, setOpen] = useState(false);
 
   const dispatch = useContext(DispatchContext);
   const darkMode = useContext(ThemeContext);
@@ -22,22 +18,37 @@ function TodoForm() {
   }
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch({type: 'ADD', newTask: value});
-    setValue('')
+    if(value.length > 30) {
+      setOpen(true);
+    } else {
+      dispatch({type: 'ADD', newTask: value});
+      setValue('')
+    }
   }
 
+  const handleClose = _=> setOpen(false);
+
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        margin='normal'
-        label='Write your task here....'
-        fullWidth
+   <>
+     <form onSubmit={handleSubmit} className='input-group mb-2'>
+        <input
+        placeholder='Write your task here....'
         onChange={handleChange}
         value={value}
-        variant='outlined'
-        className={classes.textField}
+        className='form-control'
+        required
       />
+      <button className={darkMode ? 'btn btn-outline-light ml-1' : 'btn btn-outline-dark ml-1'}>Add Task</button>
     </form>
+
+    <Snackbar open={open} autoHideDuration={4000} onClose=      {handleClose}
+    anchorOrigin={{ vertical: 'top', horizontal:'right' }}
+    >
+      <Alert onClose={handleClose} severity="warning">
+        Input Must be 30 characters or less!
+      </Alert>
+    </Snackbar>
+   </>
   )
 }
 export default TodoForm;

@@ -7,10 +7,10 @@ export default function PageContent(props) {
   const styles = {
     width: '100vw',
     height: '100vh',
-    backgroundColor: darkMode ? '#222' : '#fff'
+    backgroundColor: darkMode ? '#222' : '#fff',
   }
   return (
-       <div style={styles}>
+      <div style={styles}>
         {props.children}
       </div>
   )
