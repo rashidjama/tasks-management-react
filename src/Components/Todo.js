@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, memo } from 'react';
 import { ListItem, ListItemText, Checkbox, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import {Button, Modal} from 'react-bootstrap';
 import {DispatchContext} from '../Contexts/TodoProvider';
 import TodoEditForm from './TodoEditForm';
 import '../Styles/Todo.css';
 
-export default function Todo({ id, task, completed}) {
+  function Todo({ id, task, completed}) {
   const [isEditing, toggleEditForm] = useState(false);
   const [show, setShow] = useState(false);
 
@@ -52,3 +52,4 @@ export default function Todo({ id, task, completed}) {
   )
  }
 }
+export default memo(Todo);
