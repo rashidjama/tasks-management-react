@@ -1,4 +1,3 @@
-import { Hidden } from '@material-ui/core';
 import React, { useContext } from 'react';
 import {ThemeContext} from '../Contexts/ThemeProvider';
 
